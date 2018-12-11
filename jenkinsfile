@@ -2,7 +2,7 @@
 pipeline {
     agent any
     tools {
-        maven 'maven1.3'
+        maven 'Maven1.3'
         jdk 'jdk8'
     }
     stages {
@@ -19,11 +19,7 @@ pipeline {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
-            post {
-                success {
-                    junit 'target/*.war' 
-                }
-            }
+            
         }
     }
 }
