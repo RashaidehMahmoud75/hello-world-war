@@ -4,7 +4,7 @@
       def rtMaven 
        
       stage ('Clone') { 
-          git url: 'https://github.com/RashaidehMahmoud75/hello-world-war.git' 
+          git url: 'https://github.com/RashaidehMahmoud75/hello-world-war' 
       }     
       stage ('Artifactory configuration') { 
           // Obtain an Artifactory server instance, defined in Jenkins --> Manage: 
