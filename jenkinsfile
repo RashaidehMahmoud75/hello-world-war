@@ -42,7 +42,7 @@ node {
 
     // we need to set a newer JVM for Sonar
 
-    env.JAVA_HOME="${tool 'Java SE DK 8u131'}"
+    env.JAVA_HOME="${tool 'jdk8'}"
 
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
 
