@@ -18,6 +18,14 @@ pipeline {
                 '''
             }
         }
+         stage ('Compile') {
+            steps {
+                sh ''' 
+                mvn -Dmaven.test.failure.ignore=false compile
+              
+                '''
+            }
+            }
         stage ('Build') {
             steps {
                 sh ''' 
