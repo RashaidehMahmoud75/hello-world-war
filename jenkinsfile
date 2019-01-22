@@ -29,7 +29,7 @@ pipeline {
         stage ('Deploy to production'){
          steps {
        //wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
-        ansiblePlaybook(playbook: 'mail.yml', inventory: 'hosts',colorized: true)
+        ansiblePlaybook(playbook: '/home/ubuntu/copy-arti/mail.yml', inventory: '/home/ubuntu/copy-arti/hosts',colorized: true)
                                     }}
 }
 
