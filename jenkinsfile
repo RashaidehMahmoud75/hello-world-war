@@ -25,6 +25,7 @@ pipeline {
                 cp /var/lib/jenkins/.m2/repository/com/efsavage/hello-world-war/1.0.0/hello-world-war-1.0.0.war /home/ubuntu/artifacts
                 '''
             }
+            }
             stage ('Use Ansible') {  
        wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
         ansiblePlaybook(
@@ -36,7 +37,7 @@ pipeline {
       
       }
             
-        }
+        
       
       
 }
