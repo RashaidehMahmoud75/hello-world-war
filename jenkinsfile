@@ -27,17 +27,10 @@ pipeline {
             }
             }
         stage ('Deploy to production'){
-
-
-    //wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
-        ansiblePlaybook(
-            playbook: 'mail.yml',
-            inventory: 'hosts',
-            colorized: true
-            )
-
-
-}
+         steps {
+       //wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+        ansiblePlaybook(playbook: 'mail.yml', inventory: 'hosts',colorized: true)
+                                    }}
 }
 
 }
