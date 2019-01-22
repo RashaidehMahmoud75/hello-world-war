@@ -1,54 +1,21 @@
 pipeline {
-    agent any
-    stages {
-        stage ('Clone') {
-            steps {
-                git branch: 'master', url: "https://github.com/RashaidehMahmoud75/hello-world-war.git"
-            }
-        }
-
-        stage ('Artifactory configuration') {
-            steps {
-                rtServer (
-                    id: "artifactory",
-                    url: "/home/ubuntu/artifacts/",
-                    credentialsId: "CREDENTIALS"
-                )
-
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "artifactory",
-                    releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-snapshot-local"
-                )
-
-                rtMavenResolver (
-                    id: "MAVEN_RESOLVER",
-                    serverId: "artifactory",
-                    releaseRepo: "libs-release",
-                    snapshotRepo: "libs-snapshot"
-                )
-            }
-        }
-
-        stage ('Exec Maven') {
-            steps {
-                rtMavenRun (
-                    tool: "MAVEN", // Tool name from Jenkins configuration
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER",
-                    resolverId: "MAVEN_RESOLVER"
-                )
-            }
-        }
-
-        stage ('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: "ARTIFACTORY_SERVER"
-                )
-            }
-        }
-    }
+    node{
+  stage ('Build') {
+ 
+    git url: 'https://github.com/RashaidehMahmoud75/hello-world-war.git' 
+ 
+    withMaven(
+        // Maven installation declared in the Jenkins "Global Tool Configuration"
+        maven: 'MAVEN',
+        // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+        // Maven settings and global settings can also be defined in Jenkins Global Tools Configuration
+       // mavenSettingsConfig: 'my-maven-settings',
+      //  mavenLocalRepo: '.repository') {
+ 
+      // Run the maven build
+      sh "mvn clean install"
+ 
+    } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe & FindBugs reports...
+  }
+}
 }
