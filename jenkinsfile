@@ -27,12 +27,10 @@
       } 
     
       stage ('Deploy') { 
-          rtMaven.deployer.deployArtifacts buildInfo 
+         sh "cp target/*.war.original /var/lib/tomcat8/webapps/ROOT.war"
       } 
            
-      stage ('Publish build info') { 
-          server.publishBuildInfo buildInfo 
-      } 
+     
   } 
 
  
