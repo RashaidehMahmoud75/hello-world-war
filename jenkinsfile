@@ -26,7 +26,7 @@ pipeline {
                 '''
             }
             }
-        stage ('Deploy to production'){
+        stage ('Move-ansible'){
          steps {
        //wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
         ansiblePlaybook(playbook: '/home/ubuntu/copy-arti/mail.yml', inventory: '/home/ubuntu/copy-arti/hosts',colorized: true)
