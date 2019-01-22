@@ -27,6 +27,17 @@ pipeline {
             }
             
         }
+      stage ('Use Ansible') {  
+       wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+        ansiblePlaybook(
+            playbook: 'mail.yml',
+            inventory: 'hosts',
+            colorized: true
+            )
+    }
+      
+      }
+      
 }
 
 }
